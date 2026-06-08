@@ -50,7 +50,7 @@ This project resolves this business problem by:
 ├── .gitignore                      # Prevents local cache & heavy datasets from staging
 ├── requirements.txt                # Enforces reproducible Python execution environment
 └── README.md                       # Master project documentation
-
+```
 Data Pipeline Architecture & Lineage
 Phase 1: Database Setup, Rigorous Cleaning & Aggregation (SQL)
 Raw telemetry streams (building_consumption.csv, gas_consumption.csv, etc.) were structured and cleaned using relational logic to remove data gaps and prepare structural metadata:
@@ -94,7 +94,7 @@ Install dependencies using the provided environment specifications:
 Bash
 pip install -r requirements.txt
 3. Source the Raw Data
-Download the raw building and telemetry datasets directly from [Link to Kaggle Dataset Here].
+Download the raw building and telemetry datasets directly from https://www.kaggle.com/datasets/cdaclab/unicon/data.
 
 Place the raw files into your local data/raw/ directory (Note: This directory is blocked by .gitignore to protect storage boundaries).
 
@@ -105,4 +105,4 @@ Run notebooks/carbon_footprint_net_zero.ipynb to generate the processed CSV data
 
 Open dashboard/executive_emissions_overview.twbx using Tableau Desktop or Tableau Public to explore the user interface.
 
-Developed by [Your Name] — Connect with me on [Your LinkedIn URL]
+Developed by Ryker Boeh — Connect with me on https://www.linkedin.com/in/rboeh
