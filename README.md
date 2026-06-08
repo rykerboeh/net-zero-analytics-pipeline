@@ -51,6 +51,8 @@ This project resolves this business problem by:
 ├── requirements.txt                # Enforces reproducible Python execution environment
 └── README.md                       # Master project documentation
 ```
+---
+
 Data Pipeline Architecture & Lineage
 Phase 1: Database Setup, Rigorous Cleaning & Aggregation (SQL)
 Raw telemetry streams (building_consumption.csv, gas_consumption.csv, etc.) were structured and cleaned using relational logic to remove data gaps and prepare structural metadata:
