@@ -53,54 +53,52 @@ This project resolves this business problem by:
 ```
 ---
 
-Data Pipeline Architecture & Lineage
-Phase 1: Database Setup, Rigorous Cleaning & Aggregation (SQL)
-Raw telemetry streams (building_consumption.csv, gas_consumption.csv, etc.) were structured and cleaned using relational logic to remove data gaps and prepare structural metadata:
+## ⚙️ Data Pipeline Architecture & Lineage
 
-01_database_creation.sql: Defines schemas, constraint rules, and primary/foreign key mappings across consumption logs and campus metadata tables.
+### Phase 1: Database Setup, Rigorous Cleaning & Aggregation (SQL)
+Raw telemetry streams (`building_consumption.csv`, `gas_consumption.csv`, etc.) were structured and cleaned using relational logic to remove data gaps and prepare structural metadata:
+* **`01_database_creation.sql`**: Defines schemas, constraint rules, and primary/foreign key mappings across consumption logs and campus metadata tables.
+* **`02_data_cleaning.sql`**: Isolates and handles null values, drops duplicate entries, handles unit mismatches, and applies timestamp standardization.
+* **`03_data_aggregation.sql`**: Uses Window Functions and Common Table Expressions (CTEs) to consolidate daily meter reads into monthly, building-level profiles.
 
-02_data_cleaning.sql: Isolates and handles null values, drops duplicate entries, handles unit mismatches, and applies timestamp standardization.
+### Phase 2: Granularity Engineering & 2030 Predictive Modeling (Python)
+Using the consolidated SQL views, the pipeline moves to Python (`notebooks/carbon_footprint_net_zero.ipynb`) to build out carbon accounting fields and time-series projections:
+* **Scope Classification:** Dynamically maps utility types to Greenhouse Gas (GHG) accounting classifications (Scope 1 for on-site gas combustion vs. Scope 2 for purchased electricity grid consumption).
+* **Forecasting Pipeline:** Projects operational emissions data forward to 2026-2030 utilizing time-series business-as-usual (BAU) trend assumptions to model true gaps against carbon reduction targets.
+* **Outputs:** Generates two streamlined tables in `data/processed/` that drastically decrease Tableau's rendering latency.
 
-03_data_aggregation.sql: Uses Window Functions and Common Table Expressions (CTEs) to consolidate daily meter reads into monthly, building-level profiles.
-
-Phase 2: Granularity Engineering & 2030 Predictive Modeling (Python)
-Using the consolidated SQL views, the pipeline moves to Python (notebooks/carbon_footprint_net_zero.ipynb) to build out carbon accounting fields and time-series projections:
-
-Scope Classification: Dynamically maps utility types to Greenhouse Gas (GHG) accounting classifications (Scope 1 for on-site gas combustion vs. Scope 2 for purchased electricity grid consumption).
-
-Forecasting Pipeline: Projects operational emissions data forward to 2026-2030 utilizing time-series business-as-usual (BAU) trend assumptions to model true gaps against carbon reduction targets.
-
-Outputs: Generates two streamlined tables in data/processed/ that drastically decrease Tableau's rendering latency.
-
-Phase 3: Enterprise Analytics Design (Tableau)
+### Phase 3: Enterprise Analytics Design (Tableau)
 The front-end design avoids generic chart-dump layouts, using an executive-first layout focused on action-oriented analytics:
+* **Target Variance KPI:** Tracks current performance explicitly (`+26.0% Above Target`), prompting immediate corporate resource allocation.
+* **Portfolio-Weighted Carbon Intensity:** Engineered as a calculated field `SUM([Total Emissions]) / SUM([Gross Floor Area]) * 1000000` to prevent unweighted averages from skewing strategic planning. Normalized as **MTCO2e / Million sq. ft.** for enterprise consistency.
+* **Portfolio Efficiency Audit (Scatterplot):** Intentionally maps total emissions against total square footage to immediately isolate high-emissions structural outliers.
+* **Intensity Trends by Property Type (Heatmap):** Maps continuous historical change across differing asset classes to monitor real estate segment progress over time.
+* **2030 Climate Path (Timeline):** Placed as a full-width foundational visual chart tracking current historical trajectory directly against the target glidepath.
 
-Target Variance KPI: Tracks current performance explicitly (+26.0% Above Target), prompting immediate corporate resource allocation.
+---
 
-Portfolio-Weighted Carbon Intensity: Engineered as a calculated field SUM([Total Emissions]) / SUM([Gross Floor Area]) * 1000000 to prevent unweighted averages from skewing strategic planning. Normalized as MTCO2e / Million sq. ft. for enterprise consistency.
+## 🚀 How to Reproduce & Run Locally
 
-Portfolio Efficiency Audit (Scatterplot): Intentionally maps total emissions against total square footage to immediately isolate high-emissions structural outliers.
-
-Intensity Trends by Property Type (Heatmap): Maps continuous historical change across differing asset classes to monitor real estate segment progress over time.
-
-2030 Climate Path (Timeline): Placed as a full-width foundational visual chart tracking current historical trajectory directly against the target glidepath.
-
-🚀 How to Reproduce & Run Locally
-1. Clone the Repository
-Bash
+### 1. Clone the Repository
+```bash
 git clone [https://github.com/YOUR_GITHUB_USERNAME/net-zero-analytics-pipeline.git](https://github.com/YOUR_GITHUB_USERNAME/net-zero-analytics-pipeline.git)
 cd net-zero-analytics-pipeline
-2. Set Up the Python Environment
+cd net-zero-analytics-pipeline
+```
+
+### 2. Set Up the Python Environment
 Install dependencies using the provided environment specifications:
 
-Bash
+```bash
 pip install -r requirements.txt
-3. Source the Raw Data
+```
+
+### 3. Source the Raw Data
 Download the raw building and telemetry datasets directly from https://www.kaggle.com/datasets/cdaclab/unicon/data.
 
 Place the raw files into your local data/raw/ directory (Note: This directory is blocked by .gitignore to protect storage boundaries).
 
-4. Execute the SQL Pipeline & Analytical Notebook
+### 4. Execute the SQL Pipeline & Analytical Notebook
 Run files 01_ through 03_ in your preferred SQL relational database management engine to build the underlying target structures.
 
 Run notebooks/carbon_footprint_net_zero.ipynb to generate the processed CSV data output files.
