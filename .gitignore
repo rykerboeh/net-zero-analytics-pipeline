@@ -1,0 +1,13 @@
+# Ignore raw Kaggle datasets due to GitHub 100MB file limit
+data/raw/
+building_consumption.csv
+building_meta.csv
+building_submeter.csv
+campus_meta.csv
+water_consumption.csv
+gas_consumption.csv
+
+# Ignore local Python environment junk
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
