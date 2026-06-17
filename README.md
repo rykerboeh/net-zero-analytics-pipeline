@@ -2,9 +2,11 @@
 
 [![Tableau](https://img.shields.io/badge/Tableau-View_Interactive_Dashboard-E97627?style=for-the-badge&logo=tableau&logoColor=white)](INSERT_YOUR_TABLEAU_PUBLIC_LINK_HERE)
 [![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)](notebooks/carbon_footprint_net_zero.ipynb)
+![Jupyter Notebook](https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=for-the-badge&logo=jupyter&logoColor=white)
 [![SQL](https://img.shields.io/badge/SQL-PostgreSQL%20/%20MySQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](sql/)
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
-An end-to-end data engineering and analytics pipeline that ingests raw, multi-source building utility consumption data, executes a multi-stage SQL cleaning and aggregation workflow, builds a predictive 2030 net-zero forecast model in Python, and delivers an executive-ready enterprise dashboard in Tableau.
+An end-to-end data engineering and analytics pipeline that ingests raw, multi-source building utility consumption data, implements a tiered SQL cleaning and aggregation workflow, constructs a 2030 net-zero forcast model in Python, and produces an executive-ready emissions dashboard in Tableau.
 
 ---
 
@@ -15,12 +17,9 @@ An end-to-end data engineering and analytics pipeline that ingests raw, multi-so
 ---
 
 ## 🎯 Business Case & Objectives
-Organizations aiming for **Carbon Net Zero** lack visibility into which specific real estate assets are driving environmental liabilities. Raw utility telemetry data is often fragmented across multiple siloed systems (water, gas, submeters, campus logs).
+The organization in question aims to a acheive net-zero carbon footprint, but lacks visibility into what business activities and real estate assets are driving environmental liabilities. The raw data is fragmented across multiple databases.
 
-This project resolves this business problem by:
-1. **Centralizing Fragmented Telemetry:** Unifying multiple raw consumption streams into a governed relational database structure.
-2. **Normalizing Performance Audits:** Implementing a robust *Portfolio-Weighted Carbon Intensity* metric to prevent unweighted bias skewing corporate strategy.
-3. **Tracking Target Variance:** Engineering a forward-looking predictive trajectory model to gauge exact compliance alignment against corporate 2030 Net-Zero milestones.
+This project aims to centralize the fragmented data into a unified consumption database, calculate a functional weighted carbon intensity metric, and craft a "business-as-usual" projection to track consumption agains 2030 net-zero milestones.
 
 ---
 
@@ -55,7 +54,7 @@ This project resolves this business problem by:
 
 ## ⚙️ Data Pipeline Architecture & Lineage
 
-### Phase 1: Database Setup, Rigorous Cleaning & Aggregation (SQL)
+### Phase 1: Database Setup, Cleaning & Aggregation (SQL)
 Raw telemetry streams (`building_consumption.csv`, `gas_consumption.csv`, etc.) were structured and cleaned using relational logic to remove data gaps and prepare structural metadata:
 * **`01_database_creation.sql`**: Defines schemas, constraint rules, and primary/foreign key mappings across consumption logs and campus metadata tables.
 * **`02_data_cleaning.sql`**: Isolates and handles null values, drops duplicate entries, handles unit mismatches, and applies timestamp standardization.
@@ -81,7 +80,7 @@ The front-end design avoids generic chart-dump layouts, using an executive-first
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/YOUR_GITHUB_USERNAME/net-zero-analytics-pipeline.git](https://github.com/YOUR_GITHUB_USERNAME/net-zero-analytics-pipeline.git)
+git clone [https://github.com/rykerboeh/net-zero-analytics-pipeline.git](https://github.com/rykerboeh/net-zero-analytics-pipeline.git)
 cd net-zero-analytics-pipeline
 cd net-zero-analytics-pipeline
 ```
