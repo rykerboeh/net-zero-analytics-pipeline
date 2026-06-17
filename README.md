@@ -16,7 +16,7 @@ An end-to-end data engineering and analytics pipeline that ingests raw, multi-so
 ---
 
 ## 🎯 Business Case & Objectives
-The organization in question aims to a acheive net-zero carbon footprint, but lacks visibility into what business activities and real estate assets are driving environmental liabilities. The raw data is fragmented across multiple databases.
+The organization in question aims to acheive a net-zero carbon footprint, but lacks visibility into what business activities and real estate assets are driving environmental liabilities. The raw data is fragmented across multiple databases.
 
 This project aims to centralize the fragmented data into a unified consumption database, calculate a functional weighted carbon intensity metric, and craft a "business-as-usual" projection to track consumption agains 2030 net-zero milestones.
 
