@@ -1,10 +1,9 @@
 # Net-Zero Analytics Pipeline: Executive Emissions Forecasting
 
-[![Tableau](https://img.shields.io/badge/Tableau-View_Interactive_Dashboard-E97627?style=for-the-badge&logo=tableau&logoColor=white)](INSERT_YOUR_TABLEAU_PUBLIC_LINK_HERE)
+[![Tableau](https://img.shields.io/badge/Tableau-View_Interactive_Dashboard-E97627?style=for-the-badge&logo=tableau&logoColor=white)](https://public.tableau.com/app/profile/ryker.boeh/viz/ExecutiveEmissionsOverview/ExecutiveEmissionsOverview)
 [![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)](notebooks/carbon_footprint_net_zero.ipynb)
 ![Jupyter Notebook](https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=for-the-badge&logo=jupyter&logoColor=white)
 [![SQL](https://img.shields.io/badge/SQL-PostgreSQL%20/%20MySQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](sql/)
-![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
 An end-to-end data engineering and analytics pipeline that ingests raw, multi-source building utility consumption data, implements a tiered SQL cleaning and aggregation workflow, constructs a 2030 net-zero forcast model in Python, and produces an executive-ready emissions dashboard in Tableau.
 
