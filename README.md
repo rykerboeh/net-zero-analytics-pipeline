@@ -9,27 +9,27 @@ An end-to-end data engineering and analytics pipeline that ingests raw, multi-so
 
 ---
 
-### 📊 Executive Dashboard Preview
+### Executive Dashboard Preview
 <img width="1360" height="1400" alt="Executive Emissions Overview | Tableau Public" src="https://github.com/user-attachments/assets/4c15c247-c020-4b3c-97f2-bb817fec07a3" />
-> **[👉 Click here to access the live interactive dashboard on Tableau Public](https://public.tableau.com/app/profile/ryker.boeh/viz/ExecutiveEmissionsOverview/ExecutiveEmissionsOverview?publish=yes)**
+> **[Click here to access the live interactive dashboard on Tableau Public](https://public.tableau.com/app/profile/ryker.boeh/viz/ExecutiveEmissionsOverview/ExecutiveEmissionsOverview?publish=yes)**
 
 ---
 
-## 🎯 Business Case & Objectives
+## Business Case & Objectives
 The organization in question aims to acheive a net-zero carbon footprint, but lacks visibility into what business activities and real estate assets are driving environmental liabilities. The raw data is fragmented across multiple databases.
 
 This project aims to centralize the fragmented data into a unified consumption database, calculate a functional weighted carbon intensity metric, and craft a "business-as-usual" projection to track consumption against 2030 net-zero milestones.
 
 ---
 
-## 🛠 Tech Stack & Tools
+## Tech Stack & Tools
 * **Data Ingestion & Extraction:** SQL (DBCreation, CTEs, Joins, Window Functions)
 * **Data Pipeline & Analytics:** Python (Pandas, NumPy, Jupyter Notebooks)
 * **Business Intelligence:** Tableau Desktop (Calculated Fields, Fixed Container UI Design, Executive KPI Tracking)
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 ```text
 ├── data/
 │   ├── raw/                        # Source Kaggle data (Git-ignored)
@@ -51,7 +51,7 @@ This project aims to centralize the fragmented data into a unified consumption d
 ```
 ---
 
-## ⚙️ Data Pipeline Architecture & Lineage
+## Data Pipeline Architecture & Lineage
 
 ### Phase 1: Database Setup, Cleaning & Aggregation (SQL)
 Raw telemetry streams (`building_consumption.csv`, `gas_consumption.csv`, etc.) were structured and cleaned using relational logic to remove data gaps and prepare structural metadata:
@@ -75,7 +75,7 @@ The front-end design avoids generic chart-dump layouts, using an executive-first
 
 ---
 
-## 🚀 How to Reproduce & Run Locally
+## How to Reproduce & Run Locally
 
 ### 1. Clone the Repository
 ```bash
