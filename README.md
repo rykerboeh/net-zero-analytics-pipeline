@@ -92,16 +92,16 @@ pip install -r requirements.txt
 ```
 
 ### 3. Source the Raw Data
-* **Download the raw building and telemetry datasets directly from https://www.kaggle.com/datasets/cdaclab/unicon/data.
+* Download the raw building and telemetry datasets directly from https://www.kaggle.com/datasets/cdaclab/unicon/data.
 
-* **Place the raw files into your local data/raw/ directory (Note: This directory is blocked by .gitignore to protect storage boundaries).
+* Place the raw files into your local data/raw/ directory (Note: This directory is blocked by .gitignore to protect storage boundaries).
 
 ### 4. Execute the SQL Pipeline & Analytical Notebook
-* **Run files 01_ through 03_ in your preferred SQL relational database management engine to build the underlying target structures.
+* Run files 01_ through 03_ in your preferred SQL relational database management engine to build the underlying target structures.
 
-* **Run notebooks/carbon_footprint_net_zero.ipynb to generate the processed CSV data output files.
+* Run notebooks/carbon_footprint_net_zero.ipynb to generate the processed CSV data output files.
 
-* **Open dashboard/executive_emissions_overview.twbx using Tableau Desktop or Tableau Public to explore the user interface.
+* Open dashboard/executive_emissions_overview.twbx using Tableau Desktop or Tableau Public to explore the user interface.
 
 
 Developed by Ryker Boeh — Connect with me on https://www.linkedin.com/in/rboeh
