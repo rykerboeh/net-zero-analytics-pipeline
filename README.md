@@ -53,7 +53,7 @@ This project aims to centralize the fragmented data into a unified consumption d
 
 ## Data Pipeline Architecture
 
-### Phase 1: Database Setup, Cleaning & Aggregation (SQL)
+### Phase 1: Database Creation, Cleaning & Aggregation (SQL)
 Raw datasets (`building_consumption.csv`, `gas_consumption.csv`, etc.) were structured and cleaned using relational logic to remove data gaps and prepare structural metadata:
 * **`01_database_creation.sql`**: Defines schemas and constraint rules for consumption logs and metadata tables for further processing in PostgreSQL.
 * **`02_data_cleaning.sql`**: Isolates and handles null values, drops duplicate entries, handles unit mismatches, and applies timestamp standardization.
@@ -61,17 +61,19 @@ Raw datasets (`building_consumption.csv`, `gas_consumption.csv`, etc.) were stru
 
 ### Phase 2: Granularity Engineering & 2030 Predictive Modeling (Python)
 Using the aggregated SQL views, the pipeline moves to Python (`notebooks/carbon_footprint_net_zero.ipynb`) to develop carbon accounting fields and time-series projections:
-* **Scope Classification:** Dynamically maps utility types to Greenhouse Gas (GHG) accounting classifications (Scope 1 for on-site gas combustion vs. Scope 2 for purchased electricity grid consumption).
+* **Scope Classification:** Maps utility types to Greenhouse Gas (GHG) accounting classifications (Scope 1 for on-site gas combustion and Scope 2 for purchased electricity grid consumption).
 * **Forecasting Pipeline:** Projects operational emissions data forward to 2030 utilizing time-series business-as-usual (BAU) trend assumptions to model true gaps against carbon reduction targets.
-* **Outputs:** Generates two streamlined tables in `data/processed/` and decrease Tableau's rendering latency.
+* **Outputs:** Generates two clean, optimized tables in `data/processed/` and decreases Tableau's rendering latency.
 
 ### Phase 3: Executive Emissions Dashboard Design (Tableau)
-The front-end design avoids generic chart-dump layouts, using an executive-first layout focused on action-oriented analytics:
-* **Target Variance KPI:** Tracks current performance explicitly (`+26.0% Above Target`), prompting immediate corporate resource allocation.
-* **Portfolio-Weighted Carbon Intensity:** Engineered as a calculated field `SUM([Total Emissions]) / SUM([Gross Floor Area]) * 1000000` to prevent unweighted averages from skewing strategic planning. Normalized as **MTCO2e / Million sq. ft.** for enterprise consistency.
-* **Portfolio Efficiency Audit (Scatterplot):** Intentionally maps total emissions against total square footage to immediately isolate high-emissions structural outliers.
-* **Intensity Trends by Property Type (Heatmap):** Maps continuous historical change across differing asset classes to monitor real estate segment progress over time.
-* **2030 Climate Path (Timeline):** Placed as a full-width foundational visual chart tracking current historical trajectory directly against the target glidepath.
+* **Total Emissions KPI:** Clean view of `SUM([Total Emissions])`.
+* **Weighted Carbon Intensity:** Engineered as a calculated field `SUM([Total Emissions]) / SUM([Gross Floor Area]) * 1000000` to prevent unweighted averages from skewing strategic planning. Normalized as **MTCO2e / Million sq. ft.** for enterprise consistency.
+* **Target Variance KPI:** Tracks current performance (`+26.0% Above Target`), prompting immediate corporate net-zero strategy adjustments.
+* **Total Emissions by Campus:** Granular view of `SUM([Total Emissions])` by campus name.
+* **Annual Emissions Trends by Scope:** Granular view of emission type by year.
+* **Intensity Trends by Property Type (Heatmap):** Maps historical carbon intensity across differing building categories to monitor real estate segment progress over time.
+* **Portfolio Efficiency Audit (Scatterplot):** Maps total emissions against total square footage to isolate high-emissions outliers.
+* **2030 Climate Path (Timeline):** Visual chart tracking current historical trajectory directly against the 2030 target reduction path.
 
 ---
 
@@ -81,27 +83,27 @@ The front-end design avoids generic chart-dump layouts, using an executive-first
 ```bash
 git clone [https://github.com/rykerboeh/net-zero-analytics-pipeline.git](https://github.com/rykerboeh/net-zero-analytics-pipeline.git)
 cd net-zero-analytics-pipeline
-cd net-zero-analytics-pipeline
 ```
 
 ### 2. Set Up the Python Environment
-Install dependencies using the provided environment specifications:
+Install python dependencies using the provided specifications:
 
 ```bash
 pip install -r requirements.txt
 ```
 
 ### 3. Source the Raw Data
-* Download the raw building and telemetry datasets directly from https://www.kaggle.com/datasets/cdaclab/unicon/data.
+* Download the raw metadata and utility datasets directly from https://www.kaggle.com/datasets/cdaclab/unicon/data.
 
-* Place the raw files into your local data/raw/ directory (Note: This directory is blocked by .gitignore to protect storage boundaries).
+* Place the raw files into your local `data/raw/` directory (This directory is blocked by `.gitignore` to protect storage boundaries).
 
 ### 4. Execute the SQL Pipeline & Analytical Notebook
-* Run files 01_ through 03_ in your preferred SQL relational database management engine to build the underlying target structures.
+* Run files `01_` through `03_` in your preferred SQL relational database management engine to establish the underlying database structures.
 
-* Run notebooks/carbon_footprint_net_zero.ipynb to generate the processed CSV data output files.
+* Run `notebooks/carbon_footprint_net_zero.ipynb` to generate the processed CSV data output files.
 
-* Open dashboard/executive_emissions_overview.twbx using Tableau Desktop or Tableau Public to explore the user interface.
+* Open `dashboard/executive_emissions_overview.twbx` using Tableau Desktop or Tableau Public to explore the user interface.
 
+---
 
 Developed by Ryker Boeh — Connect with me on https://www.linkedin.com/in/rboeh
