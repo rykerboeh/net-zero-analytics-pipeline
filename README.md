@@ -51,7 +51,7 @@ This project aims to centralize the fragmented data into a unified consumption d
 ```
 ---
 
-## Data Pipeline Architecture & Lineage
+## Data Pipeline Architecture
 
 ### Phase 1: Database Setup, Cleaning & Aggregation (SQL)
 Raw datasets (`building_consumption.csv`, `gas_consumption.csv`, etc.) were structured and cleaned using relational logic to remove data gaps and prepare structural metadata:
@@ -60,12 +60,12 @@ Raw datasets (`building_consumption.csv`, `gas_consumption.csv`, etc.) were stru
 * **`03_data_aggregation.sql`**: Uses Window Functions and Common Table Expressions (CTEs) to aggregate daily meter reads into monthly, building-level profiles.
 
 ### Phase 2: Granularity Engineering & 2030 Predictive Modeling (Python)
-Using the aggregated SQL views, the pipeline moves to Python (`notebooks/carbon_footprint_net_zero.ipynb`) to build out carbon accounting fields and time-series projections:
+Using the aggregated SQL views, the pipeline moves to Python (`notebooks/carbon_footprint_net_zero.ipynb`) to develop carbon accounting fields and time-series projections:
 * **Scope Classification:** Dynamically maps utility types to Greenhouse Gas (GHG) accounting classifications (Scope 1 for on-site gas combustion vs. Scope 2 for purchased electricity grid consumption).
-* **Forecasting Pipeline:** Projects operational emissions data forward to 2026-2030 utilizing time-series business-as-usual (BAU) trend assumptions to model true gaps against carbon reduction targets.
-* **Outputs:** Generates two streamlined tables in `data/processed/` that drastically decrease Tableau's rendering latency.
+* **Forecasting Pipeline:** Projects operational emissions data forward to 2030 utilizing time-series business-as-usual (BAU) trend assumptions to model true gaps against carbon reduction targets.
+* **Outputs:** Generates two streamlined tables in `data/processed/` and decrease Tableau's rendering latency.
 
-### Phase 3: Enterprise Analytics Design (Tableau)
+### Phase 3: Executive Emissions Dashboard Design (Tableau)
 The front-end design avoids generic chart-dump layouts, using an executive-first layout focused on action-oriented analytics:
 * **Target Variance KPI:** Tracks current performance explicitly (`+26.0% Above Target`), prompting immediate corporate resource allocation.
 * **Portfolio-Weighted Carbon Intensity:** Engineered as a calculated field `SUM([Total Emissions]) / SUM([Gross Floor Area]) * 1000000` to prevent unweighted averages from skewing strategic planning. Normalized as **MTCO2e / Million sq. ft.** for enterprise consistency.
